@@ -1,325 +1,378 @@
-﻿<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="th">
 <head>
-    <meta charset="utf-8">
-    <title>Your Name Here - Welcome</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Html5TemplatesDreamweaver.com">
-	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW"> <!-- Remove this Robots Meta Tag, to allow indexing of site -->
-
-    <link href="scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="scripts/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Icons -->
-    <link href="scripts/icons/general/stylesheets/general_foundicons.css" media="screen" rel="stylesheet" type="text/css" />  
-    <link href="scripts/icons/social/stylesheets/social_foundicons.css" media="screen" rel="stylesheet" type="text/css" />
-    <!--[if lt IE 8]>
-        <link href="scripts/icons/general/stylesheets/general_foundicons_ie7.css" media="screen" rel="stylesheet" type="text/css" />
-        <link href="scripts/icons/social/stylesheets/social_foundicons_ie7.css" media="screen" rel="stylesheet" type="text/css" />
-    <![endif]-->
-    <link rel="stylesheet" href="scripts/fontawesome/css/font-awesome.min.css">
-    <!--[if IE 7]>
-        <link rel="stylesheet" href="scripts/fontawesome/css/font-awesome-ie7.min.css">
-    <![endif]-->
-
-    <link href="scripts/carousel/style.css" rel="stylesheet" type="text/css" />
-    <link href="scripts/camera/css/camera.css" rel="stylesheet" type="text/css" />
-
-    <link href="http://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">
-
-    <link href="styles/custom.css" rel="stylesheet" type="text/css" />
+    <title>สรุปข่าวการลงทุน: MK & ZEN (2019-2024)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals (Stone/Gray with Blue/Green Accents) -->
+    <!-- Application Structure Plan: 
+        โครงสร้างที่เลือกใช้คือ "แดชบอร์ดเปรียบเทียบเชิงโต้ตอบ" (Interactive Comparison Dashboard) โดยมีแถบนำทาง (Tabs) 4 ส่วนหลัก: 
+        1. ภาพรวม (Overview): แสดงความสัมพันธ์หลักและแผนภูมิเปรียบเทียบกลยุทธ์ 
+        2. MK Real Estate: เจาะลึกข่าวการลงทุนสำคัญของ MK 
+        3. Zen Group: เจาะลึกข่าวการลงทุนสำคัญของ ZEN 
+        4. ไทม์ไลน์ (Timeline): แสดงลำดับเวลาของเหตุการณ์ทั้งหมด 
+        เหตุผลที่เลือกโครงสร้างนี้: ผู้ใช้ต้องการ "ค้นหาข่าว" ของ "สองบริษัท" ใน "ช่วงเวลาหนึ่ง" โครงสร้างนี้จึงตอบโจทย์โดยตรง ช่วยให้ผู้ใช้สามารถเปรียบเทียบ (MK vs ZEN), เจาะลึก (MK, ZEN) และดูภาพรวมตามเวลา (Timeline) ได้อย่างชัดเจนและง่ายดาย แทนที่จะแสดงรายการข่าวแบบคงที่ 
+    -->
+    <!-- Visualization & Content Choices: 
+        1. ข้อมูล: การเปลี่ยนแปลงกลยุทธ์ของ MK (อสังหาฯ -> +อาหาร) และ ZEN (หลากหลาย -> โฟกัสแบรนด์หลัก) 
+           เป้าหมาย: เปรียบเทียบ 
+           วิธีนำเสนอ: แผนภูมิแท่งแบบกลุ่ม (Grouped Bar Chart) 
+           ไลบรารี: Chart.js (Canvas) 
+           ปฏิสัมพันธ์: Tooltips แสดงรายละเอียด 
+           เหตุผล: แสดงให้เห็นการเปลี่ยนแปลง "ก่อน-หลัง" ของทั้งสองบริษัทในแผนภูมิเดียวอย่างชัดเจน 
+        2. ข้อมูล: เหตุการณ์สำคัญเรียงตามปี (ZEN IPO, MK ซื้อแหลมเจริญ, MK ซื้อ BIF จาก ZEN, ZEN ขยายแฟรนไชส์) 
+           เป้าหมาย: แสดงลำดับเหตุการณ์ (Change over time) 
+           วิธีนำเสนอ: ไทม์ไลน์แนวตั้ง (Vertical Timeline) 
+           ไลบรารี: HTML/Tailwind CSS 
+           ปฏิสัมพันธ์: ไฮไลท์ตามบริษัท (เมื่อเลือกแถบ MK/ZEN) 
+           เหตุผล: ตอบโจทย์เรื่อง "ช่วงเวลา 2019-2024" ได้ดีที่สุด แสดงความเชื่อมโยงของเหตุการณ์ได้ชัดเจน 
+        3. ข้อมูล: ไฮไลท์ข่าว (ข้อความสรุป) 
+           เป้าหมาย: แจ้งข้อมูล (Inform) 
+           วิธีนำเสนอ: รายการหัวข้อย่อย (Bulleted Lists) 
+           ไลบรารี: HTML/Tailwind 
+           ปฏิสัมพันธ์: แสดง/ซ่อน ตามแถบที่เลือก 
+           เหตุผล: นำเสนอข้อมูลย่อยที่ย่อยง่ายและตรงประเด็น
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        [role="tab"] {
+            transition: all 0.3s ease;
+        }
+        [role="tab"][aria-selected="true"] {
+            border-color: #1d4ed8;
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+        [role="tabpanel"] {
+            display: none;
+        }
+        [role="tabpanel"].active {
+            display: block;
+        }
+    </style>
 </head>
-<body id="pageBody">
+<body class="bg-gray-50 text-gray-800">
 
-<div id="divBoxed" class="container">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-800 mb-2">สรุปข่าวการลงทุน: MK & ZEN (2019-2024)</h1>
+            <p class="text-lg text-gray-600">
+                แอปพลิเคชันเชิงโต้ตอบสำหรับวิเคราะห์กลยุทธ์และการลงทุนของ MK Real Estate PCL และ Zen Corporation Group PCL
+            </p>
+        </header>
 
-    <div class="transparent-bg" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: -1;zoom: 1;"></div>
+        <nav class="flex justify-center border-b border-gray-300 mb-6" role="tablist" aria-label="ข้อมูลการลงทุน">
+            <button role="tab" aria-selected="true" data-tab="overview" class="py-3 px-4 md:px-6 border-b-2 border-transparent text-gray-600 hover:text-blue-600">
+                ภาพรวม
+            </button>
+            <button role="tab" aria-selected="false" data-tab="mk" class="py-3 px-4 md:px-6 border-b-2 border-transparent text-gray-600 hover:text-blue-600">
+                MK Real Estate
+            </button>
+            <button role="tab" aria-selected="false" data-tab="zen" class="py-3 px-4 md:px-6 border-b-2 border-transparent text-gray-600 hover:text-blue-600">
+                Zen Group
+            </button>
+            <button role="tab" aria-selected="false" data-tab="timeline" class="py-3 px-4 md:px-6 border-b-2 border-transparent text-gray-600 hover:text-blue-600">
+                ไทม์ไลน์
+            </button>
+        </nav>
 
-    <div class="divPanel notop nobottom">
-            <div class="row-fluid">
-                <div class="span12">
-
-                    <div id="divLogo" class="pull-left">
-                        <a href="index.html" id="divSiteTitle">Your Name</a><br />
-                        <a href="index.html" id="divTagLine">Your Tag Line Here</a>
-                    </div>
-
-                    <div id="divMenuRight" class="pull-right">
-                    <div class="navbar">
-                        <button type="button" class="btn btn-navbar-highlight btn-large btn-primary" data-toggle="collapse" data-target=".nav-collapse">
-                            NAVIGATION <span class="icon-chevron-down icon-white"></span>
-                        </button>
-                        <div class="nav-collapse collapse">
-                            <ul class="nav nav-pills ddmenu">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-							<li class="dropdown">
-                            <a href="page.html" class="dropdown-toggle">Page <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                            <li><a href="full.html">Full Page</a></li>
-                            <li><a href="2-column.html">Two Column</a></li>
-                            <li><a href="3-column.html">Three Column</a></li>
-							<li><a href="../documentation/index.html">Documentation</a></li>
-							<li class="dropdown">
-                            <a href="#" class="dropdown-toggle">Dropdown Item &nbsp;&raquo;</a>
-                            <ul class="dropdown-menu sub-menu">
-                            <li><a href="#">Dropdown Item</a></li>
-                            <li><a href="#">Dropdown Item</a></li>
-                            <li><a href="#">Dropdown Item</a></li>
-                            </ul>
-                            </li>
-                            </ul>
-                            </li>
-						    <li><a href="services.html">Services</a></li>
-						    <li><a href="portfolio.html">Portfolio</a></li>
-						    <li><a href="contact.php">Contact</a></li>
-                            </ul>
-                            </div>
-                    </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row-fluid">
-            <div class="span12">
-
-                <div id="headerSeparator"></div>
-
-                <div class="camera_full_width">
-                    <div id="camera_wrap">
-                        <div data-src="slider-images/4.jpg" ><div class="camera_caption fadeFromBottom cap1">Add a slogan or feature here...</div></div>
-						<div data-src="slider-images/1.jpg" ><div class="camera_caption fadeFromBottom cap2">Add a slogan or feature here...</div></div>
-						<div data-src="slider-images/2.jpg" ></div>
-                    </div>
-                    <br style="clear:both"/><div style="margin-bottom:40px"></div>
-                </div>               
-
-                <div id="headerSeparator2"></div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="contentArea">
-
-        <div class="divPanel notop page-content">
+        <main id="tab-content">
             
-
-            <div class="row-fluid">
-            <!--Edit Main Content Area here-->
-                <div class="span12" id="divMain">
-                    <h1>Welcome</h1>
-                    				
-					<p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</strong> Sed ipsum metus, pulvinar sed volutpat sit amet, fermentum in orci. Quisque vitae neque lectus, quis accumsan massa. Vivamus viverra orci eu dolor tristique sollicitudin. Duis sollicitudin laoreet tellus ac dictum. 
-					Fusce suscipit lectus vel elit posuere volutpat. Morbi ornare eros ut magna ullamcorper feugiat. 
-					Vivamus feugiat ligula vel nisi venenatis eleifend. Morbi accumsan rhoncus viverra. Integer orci nisi, 
-					cursus sit amet luctus quis, dictum eget massa.</p>
-
-                    <br />                   
-                    <br />                 
-
-	<div class="row-fluid">
-    <div class="span3">
-			<div class="box">
-				<i class="icon-wrench"></i>
-				<h4 class="title">Web Design</h4> <hr/>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</p>
-			</div>
-	</div> 
-		
-	<div class="span3">
-			<div class="box">
-				<i class="icon-leaf"></i>
-				<h4 class="title">Web Development</h4> <hr/>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</p>
-			</div>
-	</div> 
-		
-	<div class="span3">
-			<div class="box">
-				<i class="icon-edit"></i>
-				<h4 class="title">Custom Themes</h4> <hr/>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</p>
-			</div>
-	</div> 
-		
-	<div class="span3">
-			<div class="box">
-				<i class="icon-signal"></i>
-				<h4 class="title">SEO</h4> <hr/>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce cursus, sapien nec dignissim porta.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</p>
-			</div>
-	</div>    </div>
-                    
-
-    <div class="row-fluid">
-            <div class="span3">
-                    <h5 class="text-info">Project 1</h5>
-                    <img src="images/home-image.jpg" class="img-polaroid" style="margin:5px 0px 15px;" alt="">                
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><a href="#">Read More &raquo;</a></p>
-            </div>
-            <div class="span3">                
-                    <h5 class="text-info">Project 2</h5>
-                    <img src="images/home-image.jpg" class="img-polaroid" style="margin:5px 0px 15px;" alt="">  
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><a href="#">Read More &raquo;</a></p>
-            </div>
-            <div class="span3">                
-                    <h5 class="text-info">Project 3</h5>
-                    <img src="images/home-image.jpg" class="img-polaroid" style="margin:5px 0px 15px;" alt="">  
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><a href="#">Read More &raquo;</a></p>
-            </div>
-			<div class="span3">
-                    <h5 class="text-info">Project 4</h5>
-                    <img src="images/home-image.jpg" class="img-polaroid" style="margin:5px 0px 15px;" alt="">                
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /><a href="#">Read More &raquo;</a></p>
-            </div>
-    </div>  
-
+            <section id="overview-content" role="tabpanel" class="active p-4">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">ภาพรวมความเคลื่อนไหว 2019-2024</h2>
+                <p class="text-gray-600 mb-6">
+                    ในช่วง 5 ปีที่ผ่านมา ความเคลื่อนไหวการลงทุนที่น่าสนใจที่สุดคือการที่ MK (บริษัทอสังหาริมทรัพย์) ได้ขยายพอร์ตเข้าสู่ธุรกิจอาหารอย่างเต็มตัว ในขณะที่ ZEN (บริษัทอาหาร) ได้ปรับกลยุทธ์โดยการขายธุรกิจบางส่วนออกไป (ให้กับ MK) เพื่อกลับมามุ่งเน้นแบรนด์หลักและขยายธุรกิจแฟรนไชส์
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3">จุดเชื่อมโยงสำคัญ: การซื้อขาย BIF</h3>
+                        <p class="mb-4">
+                            ในเดือนกรกฎาคม 2020, MK (ผ่านบริษัทย่อย) ได้เข้าซื้อกิจการ "บริษัท บางกอก อินเตอร์ ฟู๊ด จำกัด (BIF)" ซึ่งเป็นผู้ดำเนินการร้านอาหาร "Mrs. Wu" และ "Mr. T" จากกลุ่ม ZEN การซื้อขายนี้สะท้อนกลยุทธ์ของทั้งสองฝ่ายอย่างชัดเจน:
+                        </p>
+                        <ul class="list-disc list-outside pl-5 space-y-2">
+                            <li><strong class="text-amber-700">ฝั่ง MK:</strong> ต้องการขยายพอร์ตการลงทุนไปยังธุรกิจอาหารและเครื่องดื่ม (F&B) ที่มีศักยภาพ เพื่อกระจายความเสี่ยงจากธุรกิจอสังหาริมทรัพย์</li>
+                            <li><strong class="text-green-700">ฝั่ง ZEN:</strong> ต้องการลดความซับซ้อนของพอร์ตโฟลิโอ และนำทรัพยากรไปมุ่งเน้นที่แบรนด์หลัก (เช่น ZEN, AKA, On the Table) และเร่งการเติบโตของธุรกิจแฟรนไชส์ (เช่น เขียง)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3 text-center">แผนภูมิเปรียบเทียบการปรับกลยุทธ์ (โดยประมาณ)</h3>
+                        <div class="chart-container">
+                            <canvas id="strategyChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-            <!--End Main Content-->
-            </div>
+            </section>
 
-            <div id="footerInnerSeparator"></div>
-        </div>
-    </div>
-
-    <div id="footerOuterSeparator"></div>
-
-    <div id="divFooter" class="footerArea">
-
-        <div class="divPanel">
-
-            <div class="row-fluid">
-                <div class="span3" id="footerArea1">
-                
-                    <h3>About Company</h3>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
-                    
-                    <p> 
-                        <a href="#" title="Terms of Use">Terms of Use</a><br />
-                        <a href="#" title="Privacy Policy">Privacy Policy</a><br />
-                        <a href="#" title="FAQ">FAQ</a><br />
-                        <a href="#" title="Sitemap">Sitemap</a>
-                    </p>
-
-                </div>
-                <div class="span3" id="footerArea2">
-
-                    <h3>Recent Blog Posts</h3> 
-                    <p>
-                        <a href="#" title="">Lorem Ipsum is simply dummy text</a><br />
-                        <span style="text-transform:none;">2 hours ago</span>
-                    </p>
-                    <p>
-                        <a href="#" title="">Duis mollis, est non commodo luctus</a><br />
-                        <span style="text-transform:none;">5 hours ago</span>
-                    </p>
-                    <p>
-                        <a href="#" title="">Maecenas sed diam eget risus varius</a><br />
-                        <span style="text-transform:none;">19 hours ago</span>
-                    </p>
-                    <p>
-                        <a href="#" title="">VIEW ALL POSTS</a>
-                    </p>
-
-                </div>
-                <div class="span3" id="footerArea3">
-
-                    <h3>Sample Content</h3> 
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s. 
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.
-                    </p>
-
-                </div>
-                <div class="span3" id="footerArea4">
-
-                    <h3>Get in Touch</h3>  
-                                                               
-                    <ul id="contact-info">
-                    <li>                                    
-                        <i class="general foundicon-phone icon"></i>
-                        <span class="field">Phone:</span>
-                        <br />
-                        (123) 456 7890 / 456 7891                                                                      
-                    </li>
-                    <li>
-                        <i class="general foundicon-mail icon"></i>
-                        <span class="field">Email:</span>
-                        <br />
-                        <a href="mailto:info@yourdomain.com" title="Email">info@yourdomain.com</a>
-                    </li>
-                    <li>
-                        <i class="general foundicon-home icon" style="margin-bottom:50px"></i>
-                        <span class="field">Address:</span>
-                        <br />
-                        123 Street<br />
-                        12345 City, State<br />
-                        Country
-                    </li>
+            <section id="mk-content" role="tabpanel" class="p-4 hidden">
+                <h2 class="text-2xl font-semibold text-amber-700 mb-4">MK Real Estate: สู่การเป็นผู้เล่นในธุรกิจอาหาร</h2>
+                <p class="text-gray-600 mb-6">
+                    MK Real Estate Development PCL (M) ได้ทำการลงทุนครั้งสำคัญเพื่อกระจายความเสี่ยงจากธุรกิจอสังหาริมทรัพย์และสร้างแหล่งรายได้ใหม่ โดยมุ่งเน้นไปที่ธุรกิจอาหาร (F&B) อย่างชัดเจน
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-4">ไฮไลท์การลงทุนสำคัญ (F&B):</h3>
+                    <ul class="list-decimal list-inside space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-amber-700 font-bold mr-2">1.</span>
+                            <div>
+                                <strong class="text-gray-800">ธันวาคม 2019: เข้าซื้อกิจการ "แหลมเจริญ ซีฟู้ด" (Laem Charoen Seafood)</strong>
+                                <p class="text-sm text-gray-600">เข้าซื้อหุ้น 65% ของบริษัท แหลมเจริญ ซีฟู้ด จำกัด นับเป็นการบุกเข้าสู่ธุรกิจร้านอาหารอย่างเต็มตัวครั้งแรก ด้วยแบรนด์ร้านอาหารทะเลที่มีชื่อเสียง</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-700 font-bold mr-2">2.</span>
+                            <div>
+                                <strong class="text-gray-800">กรกฎาคม 2020: เข้าซื้อกิจการ BIF (Mrs. Wu, Mr. T) จาก ZEN</strong>
+                                <p class="text-sm text-gray-600">ขยายพอร์ตธุรกิจอาหารต่อเนื่องโดยการซื้อกิจการจาก ZEN Group เพื่อเสริมความแข็งแกร่งในพอร์ต F&B</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-700 font-bold mr-2">3.</span>
+                            <div>
+                                <strong class="text-gray-800">กลยุทธ์โดยรวม: Diversification</strong>
+                                <p class="text-sm text-gray-600">นอกจากการลงทุนใน F&B แล้ว MK ยังคงพัฒนาโครงการอสังหาริมทรัพย์แนวราบ (เช่น ชวนชื่น, ซีรีน เฮ้าส์) ควบคู่ไปกับการขยายธุรกิจด้านสุขภาพ (Wellness)</p>
+                            </div>
+                        </li>
                     </ul>
-
                 </div>
-            </div>
+            </section>
 
-            <br /><br />
-            <div class="row-fluid">
-                <div class="span12">
-                    <p class="copyright">
-                        Copyright © 2013 Your Company. All Rights Reserved.
-                    </p>
-
-                    <p class="social_bookmarks">
-                        <a href="#"><i class="social foundicon-facebook"></i> Facebook</a>
-			<a href=""><i class="social foundicon-twitter"></i> Twitter</a>
-			<a href="#"><i class="social foundicon-pinterest"></i> Pinterest</a>
-			<a href="#"><i class="social foundicon-rss"></i> Rss</a>
-                    </p>
+            <section id="zen-content" role="tabpanel" class="p-4 hidden">
+                <h2 class="text-2xl font-semibold text-green-700 mb-4">Zen Group: โฟกัสแบรนด์หลักและขยายแฟรนไชส์</h2>
+                <p class="text-gray-600 mb-6">
+                    Zen Corporation Group PCL (ZEN) ใช้ช่วงปี 2019-2024 ในการปรับโครงสร้างธุรกิจครั้งใหญ่หลังจากการ IPO เพื่อมุ่งเน้นการเติบโตในแบรนด์ที่มีความเชี่ยวชาญและขยายตัวได้เร็ว
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-4">ไฮไลท์การลงทุนและกลยุทธ์:</h3>
+                    <ul class="list-decimal list-inside space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-green-700 font-bold mr-2">1.</span>
+                            <div>
+                                <strong class="text-gray-800">กุมภาพันธ์ 2019: IPO เข้าตลาดหลักทรัพย์ (SET)</strong>
+                                <p class="text-sm text-gray-600">ระดมทุนเพื่อขยายสาขา ปรับปรุงกิจการ และชำระหนี้ สร้างความแข็งแกร่งทางการเงิน</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-700 font-bold mr-2">2.</span>
+                            <div>
+                                <strong class="text-gray-800">กรกฎาคม 2020: ขายกิจการ BIF (Mrs. Wu, Mr. T) ให้กับ MK</strong>
+                                <p class="text-sm text-gray-600">เป็นส่วนหนึ่งของกลยุทธ์ "Focus on Core Brands" เพื่อลดความซับซ้อนและนำทรัพยากรไปใช้กับแบรนด์หลัก</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-700 font-bold mr-2">3.</span>
+                            <div>
+                                <strong class="text-gray-800">2020-2024: เร่งขยายธุรกิจแฟรนไชส์ (Franchise Model)</strong>
+                                <p class="text-sm text-gray-600">มุ่งเน้นการเติบโตแบบก้าวกระโดดผ่านโมเดลแฟรนไชส์ โดยเฉพาะแบรนด์ "เขียง" (ร้านอาหารตามสั่ง) และ "ตำมั่ว" ซึ่งขยายสาขาไปทั่วประเทศอย่างรวดเร็ว</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </section>
 
-        </div>
+            <section id="timeline-content" role="tabpanel" class="p-4 hidden">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-8 text-center">ไทม์ไลน์เหตุการณ์สำคัญ (2019-2024)</h2>
+                <div id="timeline-container" class="relative max-w-3xl mx-auto">
+                </div>
+            </section>
+
+        </main>
     </div>
-</div>
-<br /><br /><br />
 
-<script src="scripts/jquery.min.js" type="text/javascript"></script> 
-<script src="scripts/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="scripts/default.js" type="text/javascript"></script>
+    <script>
+        const newsData = {
+            strategyChart: {
+                labels: ['MK Real Estate', 'Zen Group'],
+                datasets: [
+                    {
+                        label: 'สัดส่วนธุรกิจหลัก (2019)',
+                        data: [95, 80],
+                        backgroundColor: 'rgba(107, 114, 128, 0.6)',
+                        borderColor: 'rgba(107, 114, 128, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'สัดส่วนธุรกิจหลัก (2024)',
+                        data: [70, 95],
+                        backgroundColor: 'rgba(29, 78, 216, 0.6)',
+                        borderColor: 'rgba(29, 78, 216, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            timelineEvents: [
+                { year: 2019, month: 'ก.พ.', company: 'ZEN', event: 'IPO เข้าตลาดหลักทรัพย์ (SET)', description: 'Zen Group ระดมทุนสำเร็จเพื่อขยายกิจการและสร้างความแข็งแกร่ง' },
+                { year: 2019, month: 'ธ.ค.', company: 'MK', event: 'เข้าซื้อ "แหลมเจริญ ซีฟู้ด"', description: 'MK เริ่มต้นการบุกธุรกิจ F&B อย่างจริงจังด้วยการซื้อหุ้น 65%' },
+                { year: 2020, month: 'มี.ค.', company: 'GLOBAL', event: 'ผลกระทบจาก COVID-19', description: 'ทั้งสองบริษัทได้รับผลกระทบ โดยเฉพาะธุรกิจร้านอาหารที่ต้องปรับตัวสู่เดลิเวอรี' },
+                { year: 2020, month: 'ก.ค.', company: 'BOTH', event: 'MK ซื้อกิจการ BIF จาก ZEN', description: 'จุดเปลี่ยนสำคัญ MK ขยายพอร์ต F&B ส่วน ZEN โฟกัสแบรนด์หลัก' },
+                { year: 2021, month: '', company: 'ZEN', event: 'เร่งขยายแฟรนไชส์ "เขียง"', description: 'ZEN มุ่งเน้นการเติบโตผ่านโมเดลแฟรนไชส์อย่างเต็มที่' },
+                { year: 2022, month: '', company: 'MK', event: 'ผสานธุรกิจ F&B', description: 'MK บริหารจัดการพอร์ต F&B (แหลมเจริญ และ BIF) ควบคู่กับอสังหาฯ' },
+                { year: 2023, month: '', company: 'ZEN', event: 'ขยายแบรนด์หลักต่อเนื่อง', description: 'เดินหน้าขยายสาขาแบรนด์หลัก (AKA, On the Table) และแฟรนไชส์' },
+            ]
+        };
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('[role="tab"]');
+            const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+            const timelineContainer = document.getElementById('timeline-container');
 
-<script src="scripts/carousel/jquery.carouFredSel-6.2.0-packed.js" type="text/javascript"></script><script type="text/javascript">$('#list_photos').carouFredSel({ responsive: true, width: '100%', scroll: 2, items: {width: 320,visible: {min: 2, max: 6}} });</script><script src="scripts/camera/scripts/camera.min.js" type="text/javascript"></script>
-<script src="scripts/easing/jquery.easing.1.3.js" type="text/javascript"></script>
-<script type="text/javascript">function startCamera() {$('#camera_wrap').camera({ fx: 'scrollLeft', time: 2000, loader: 'none', playPause: false, navigation: true, height: '35%', pagination: true });}$(function(){startCamera()});</script>
+            function handleTabClick(event) {
+                const clickedTab = event.currentTarget;
+                const targetPanelId = clickedTab.getAttribute('data-tab') + '-content';
 
+                tabs.forEach(tab => {
+                    tab.setAttribute('aria-selected', 'false');
+                    tab.classList.remove('text-blue-700', 'font-semibold', 'bg-blue-50');
+                });
+                
+                clickedTab.setAttribute('aria-selected', 'true');
+                clickedTab.classList.add('text-blue-700', 'font-semibold', 'bg-blue-50');
+
+                tabPanels.forEach(panel => {
+                    if (panel.id === targetPanelId) {
+                        panel.classList.add('active');
+                    } else {
+                        panel.classList.remove('active');
+                    }
+                });
+
+                updateTimelineHighlight(clickedTab.getAttribute('data-tab'));
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', handleTabClick);
+            });
+
+            function renderStrategyChart() {
+                const ctx = document.getElementById('strategyChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: newsData.strategyChart,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'การเปลี่ยนแปลงสัดส่วนธุรกิจ (ประมาณการ)',
+                                font: { size: 16, family: 'Sarabun' }
+                            },
+                            tooltip: {
+                                titleFont: { family: 'Sarabun' },
+                                bodyFont: { family: 'Sarabun' }
+                            },
+                            legend: {
+                                labels: { font: { family: 'Sarabun' } }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'สัดส่วน (%)' },
+                                ticks: { font: { family: 'Sarabun' } }
+                            },
+                            x: {
+                                ticks: { font: { family: 'Sarabun', size: 14 } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function renderTimeline() {
+                let timelineHTML = '<div class="absolute left-1/2 top-0 h-full w-0.5 bg-gray-300" style="transform: translateX(-50%);"></div>';
+                
+                newsData.timelineEvents.forEach((item, index) => {
+                    const companyColor = item.company === 'MK' ? 'amber' : (item.company === 'ZEN' ? 'green' : 'gray');
+                    const sideClass = index % 2 === 0 ? 'left' : 'right';
+                    
+                    let timelineItemHTML = `
+                        <div class="relative mb-8 flex items-center w-full" data-company="${item.company}">
+                    `;
+                    
+                    if (sideClass === 'left') {
+                        timelineItemHTML += `
+                            <div class="w-1/2 pr-8 text-right">
+                                <div class="p-4 bg-white rounded-lg shadow-sm border border-gray-200 timeline-card">
+                                    <p class="font-semibold text-${companyColor}-700">${item.year} ${item.month}</p>
+                                    <p class="text-md font-bold text-gray-800">${item.event}</p>
+                                    <p class="text-sm text-gray-600">${item.description}</p>
+                                </div>
+                            </div>
+                            <div class="w-1/2"></div>
+                        `;
+                    } else {
+                        timelineItemHTML += `
+                            <div class="w-1/2"></div>
+                            <div class="w-1/2 pl-8 text-left">
+                                <div class="p-4 bg-white rounded-lg shadow-sm border border-gray-200 timeline-card">
+                                    <p class="font-semibold text-${companyColor}-700">${item.year} ${item.month}</p>
+                                    <p class="text-md font-bold text-gray-800">${item.event}</p>
+                                    <p class="text-sm text-gray-600">${item.description}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    timelineItemHTML += `
+                            <div class="absolute left-1/2 -translate-x-1/2 z-10">
+                                <div class="w-5 h-5 bg-${companyColor}-600 rounded-full border-4 border-white"></div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    timelineHTML += timelineItemHTML;
+                });
+                
+                timelineContainer.innerHTML = timelineHTML;
+            }
+
+            function updateTimelineHighlight(activeTab) {
+                const timelineCards = document.querySelectorAll('#timeline-container [data-company]');
+                
+                timelineCards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transition = 'opacity 0.3s';
+                    
+                    const cardCompany = card.getAttribute('data-company');
+                    
+                    if (activeTab === 'mk' && (cardCompany !== 'MK' && cardCompany !== 'BOTH')) {
+                        card.style.opacity = '0.3';
+                    } else if (activeTab === 'zen' && (cardCompany !== 'ZEN' && cardCompany !== 'BOTH')) {
+                        card.style.opacity = '0.3';
+                    } else if (activeTab === 'overview' || activeTab === 'timeline') {
+                        card.style.opacity = '1';
+                    }
+                });
+            }
+
+            renderStrategyChart();
+            renderTimeline();
+            
+            document.querySelector('[role="tab"][data-tab="overview"]').click();
+        });
+    </script>
 
 </body>
 </html>
